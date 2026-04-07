@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdul Haaris — UI/UX Designer</title>
+  <meta name="description" content="Portfolio of Abdul Haaris — UI/UX Designer crafting premium digital experiences that feel better than real life." />
+  <meta name="keywords" content="UI/UX Designer, Product Designer, Portfolio, Abdul Haaris" />
+  <meta name="author" content="Abdul Haaris" />
+  <meta property="og:title" content="Abdul Haaris — UI/UX Designer" />
+  <meta property="og:description" content="Designing experiences that feel better than real life." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">AH<span class="logo-dot">.</span></a>
+      <div class="nav-links">
+        <a href="#work" class="nav-link" data-hover="Work">Work</a>
+        <a href="#about" class="nav-link" data-hover="About">About</a>
+        <a href="#skills" class="nav-link" data-hover="Skills">Skills</a>
+        <a href="#contact" class="nav-link" data-hover="Contact">Contact</a>
+      </div>
+      <button class="nav-menu-btn" id="menu-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-inner">
+      <a href="#work" class="mobile-link">Work</a>
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#skills" class="mobile-link">Skills</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+  </div>
+
+  <!-- Noise Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+      <div class="gradient-orb orb-4"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge reveal-up">
+        <span class="badge-dot"></span>
+        Available for work
+      </div>
+      <h1 class="hero-name">
+        <span class="hero-line reveal-up" style="--delay: 0.1s">Abdul</span>
+        <span class="hero-line reveal-up" style="--delay: 0.25s">Haaris<span class="accent-dot">.</span></span>
+      </h1>
+      <p class="hero-tagline reveal-up" style="--delay: 0.4s">
+        Designing experiences that feel<br />
+        <span class="tagline-highlight">better than real life</span>
+      </p>
+      <div class="hero-cta reveal-up" style="--delay: 0.55s">
+        <a href="#work" class="btn btn-primary" id="cta-work">
+          <span>View Work</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost" id="cta-contact">
+          <span>Contact</span>
+        </a>
+      </div>
+      <div class="hero-scroll-indicator reveal-up" style="--delay: 0.7s">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work / Projects Section -->
+  <section class="section work-section" id="work">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label reveal-up">Selected Work</span>
+        <h2 class="section-title reveal-up">
+          Featured<br />Projects<span class="accent-dot">.</span>
+        </h2>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1: FocusFlow -->
+        <article class="project-card reveal-up" data-project="focusflow" data-pdf="/Case study pdfs/FocusFlow_Presentation (2).pdf">
+          <div class="project-card-visual">
+            <div class="project-image-wrapper">
+              <img src="/images/page 1.png" alt="FocusFlow — Digital Sanctuary" class="project-image" loading="lazy" />
+              <div class="project-image-overlay"></div>
+            </div>
+            <div class="project-number">01</div>
+          </div>
+          <div class="project-card-info">
+            <div class="project-tags">
+              <span class="project-tag">Wellness</span>
+              <span class="project-tag">Mobile App</span>
+              <span class="project-tag">UI/UX</span>
+            </div>
+            <h3 class="project-title">FocusFlow</h3>
+            <p class="project-subtitle">Your Digital Sanctuary</p>
+            <p class="project-desc">
+              A social media detox app redefining the relationship between human attention and digital interfaces through mindful editorial design.
+            </p>
+            <div class="project-features">
+              <span>Wellness Mode</span>
+              <span>Time Control Sessions</span>
+              <span>Digital Detox</span>
+            </div>
+            <button class="btn-case-study" data-pdf="/Case study pdfs/FocusFlow_Presentation (2).pdf">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              <span>View Case Study</span>
+              <svg class="arrow-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 2: MosqueConnect -->
+        <article class="project-card reveal-up" data-project="mosqueconnect" data-pdf="/Case study pdfs/MosqueConnect_Project (2).pdf">
+          <div class="project-card-visual">
+            <div class="project-image-wrapper">
+              <img src="/images/Slide 1_ Title Slide.png" alt="MasjidConnect — Sacred Contemporary" class="project-image" loading="lazy" />
+              <div class="project-image-overlay"></div>
+            </div>
+            <div class="project-number">02</div>
+          </div>
+          <div class="project-card-info">
+            <div class="project-tags">
+              <span class="project-tag">Islamic</span>
+              <span class="project-tag">Lifestyle</span>
+              <span class="project-tag">UI/UX</span>
+            </div>
+            <h3 class="project-title">MasjidConnect</h3>
+            <p class="project-subtitle">The Sacred Contemporary</p>
+            <p class="project-desc">
+              A premium, high-fidelity Islamic utility platform designed to mirror the serenity of a quiet courtyard. Nearby mosques, prayer times, and Quran.
+            </p>
+            <div class="project-features">
+              <span>Mosque Finder</span>
+              <span>Prayer Times</span>
+              <span>Quran Reader</span>
+            </div>
+            <button class="btn-case-study" data-pdf="/Case study pdfs/MosqueConnect_Project (2).pdf">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              <span>View Case Study</span>
+              <svg class="arrow-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 3: Curator -->
+        <article class="project-card reveal-up" data-project="curator" data-pdf="/Case study pdfs/Curator App Presentation.pdf">
+          <div class="project-card-visual">
+            <div class="project-image-wrapper">
+              <img src="/images/page 1 - Copy.png" alt="Curator — Reimagining the Digital Archive" class="project-image" loading="lazy" />
+              <div class="project-image-overlay"></div>
+            </div>
+            <div class="project-number">03</div>
+          </div>
+          <div class="project-card-info">
+            <div class="project-tags">
+              <span class="project-tag">Knowledge</span>
+              <span class="project-tag">Reference</span>
+              <span class="project-tag">UI/UX</span>
+            </div>
+            <h3 class="project-title">Curator</h3>
+            <p class="project-subtitle">Reimagining the Digital Archive</p>
+            <p class="project-desc">
+              A scholarly minimalist exploration into digital preservation and intuitive discovery. Bridging the tactile library and the fluid screen.
+            </p>
+            <div class="project-features">
+              <span>Tactile Digitalism</span>
+              <span>Intentional Space</span>
+              <span>Curated Motion</span>
+            </div>
+            <button class="btn-case-study" data-pdf="/Case study pdfs/Curator App Presentation.pdf">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              <span>View Case Study</span>
+              <svg class="arrow-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-left">
+          <span class="section-label reveal-up">About</span>
+          <h2 class="section-title reveal-up">
+            Crafting digital<br />experiences with<br />purpose<span class="accent-dot">.</span>
+          </h2>
+        </div>
+        <div class="about-right">
+          <div class="about-text reveal-up">
+            <p>
+              I'm Abdul Haaris — a UI/UX designer who believes that great design isn't just about looks. 
+              It's about creating moments that resonate, interfaces that breathe, and products that genuinely 
+              improve how people interact with technology.
+            </p>
+            <p>
+              Every pixel I place is intentional. Every interaction I design is meaningful. I approach 
+              design the way an architect approaches space — with deep respect for the humans who will 
+              inhabit it.
+            </p>
+            <p>
+              My work spans wellness apps, spiritual platforms, and knowledge tools — always with the 
+              same philosophy: <strong>design should feel inevitable.</strong>
+            </p>
+          </div>
+          <div class="about-stats reveal-up">
+            <div class="stat">
+              <span class="stat-number" data-count="3">0</span>
+              <span class="stat-label">Featured Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-count="2">0</span><span class="stat-suffix">+</span>
+              <span class="stat-label">Years Learning</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-count="100">0</span><span class="stat-suffix">%</span>
+              <span class="stat-label">Passion Driven</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section skills-section" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label reveal-up">Expertise</span>
+        <h2 class="section-title reveal-up">
+          What I<br />bring<span class="accent-dot">.</span>
+        </h2>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Design Tools -->
+        <div class="skill-card reveal-up" style="--delay: 0.05s">
+          <div class="skill-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
+              <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/>
+              <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/>
+              <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/>
+              <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
+            </svg>
+          </div>
+          <h3 class="skill-title">Design Tools</h3>
+          <p class="skill-desc">Expertise in industry-standard design and prototyping tools. Creating pixel-perfect interfaces from concept to high-fidelity deliverables.</p>
+          <div class="skill-tools">Figma · Adobe Illustrator · Canva · Framer</div>
+        </div>
+
+        <!-- Frontend Basics -->
+        <div class="skill-card reveal-up" style="--delay: 0.15s">
+          <div class="skill-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+              <line x1="14" y1="4" x2="10" y2="20"/>
+            </svg>
+          </div>
+          <h3 class="skill-title">Frontend Basics</h3>
+          <p class="skill-desc">Solid understanding of HTML, CSS, and VS Code — bridging the gap between design and development with hands-on code knowledge.</p>
+          <div class="skill-tools">HTML · CSS · VS Code</div>
+        </div>
+
+        <!-- AI & Emerging Tech -->
+        <div class="skill-card reveal-up" style="--delay: 0.25s">
+          <div class="skill-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/>
+              <path d="M12 2a4 4 0 0 0-4 4c0 1.95 1.4 3.58 3.25 3.93"/>
+              <path d="M16 16h3a2 2 0 1 1 0 4h-3"/>
+              <path d="M8 16H5a2 2 0 1 0 0 4h3"/>
+              <circle cx="12" cy="12" r="2"/>
+            </svg>
+          </div>
+          <h3 class="skill-title">AI & Emerging Tech</h3>
+          <p class="skill-desc">Leveraging cutting-edge AI tools to supercharge the design workflow — from ideation and research to rapid prototyping and content.</p>
+          <div class="skill-tools">Antigravity · Stitch</div>
+        </div>
+
+        <!-- Product Thinking -->
+        <div class="skill-card reveal-up" style="--delay: 0.35s">
+          <div class="skill-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+          </div>
+          <h3 class="skill-title">Product Thinking</h3>
+          <p class="skill-desc">Understanding user needs deeply and translating them into elegant, purposeful products through research, strategy, and user flows.</p>
+          <div class="skill-tools">User Research · Strategy · User Flows</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-glow"></div>
+        <span class="section-label reveal-up">Get in Touch</span>
+        <h2 class="contact-title reveal-up">
+          Have an idea, opportunity,<br />or collaboration in mind?
+        </h2>
+        <p class="contact-subtitle reveal-up">
+          Let's create something extraordinary together.
+        </p>
+        <div class="contact-buttons reveal-up">
+          <a href="mailto:contact.abdulhaaris@gmail.com" class="btn btn-contact-primary" id="btn-email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M22 4L12 13 2 4"/>
+            </svg>
+            <span>Send a Mail</span>
+          </a>
+          <a href="https://www.linkedin.com/in/abdulhaaris" target="_blank" rel="noopener noreferrer" class="btn btn-contact-secondary" id="btn-linkedin">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copyright">© 2025 Abdul Haaris</span>
+        <span class="footer-tagline">Designed with intention</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PDF Viewer Modal -->
+  <div class="pdf-modal" id="pdf-modal">
+    <div class="pdf-modal-backdrop"></div>
+    <div class="pdf-modal-container">
+      <div class="pdf-modal-header">
+        <div class="pdf-modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span id="pdf-modal-project-name">Case Study</span>
+        </div>
+        <div class="pdf-modal-actions">
+          <a href="#" class="pdf-download-btn" id="pdf-download-btn" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>Download</span>
+          </a>
+          <button class="pdf-close-btn" id="pdf-close-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="pdf-modal-body">
+        <iframe id="pdf-iframe" src="" class="pdf-iframe" title="Case Study PDF"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
