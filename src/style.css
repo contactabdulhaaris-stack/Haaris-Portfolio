@@ -4,41 +4,41 @@
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Colors */
-  --bg-primary: #06060a;
-  --bg-secondary: #0c0c14;
+  /* Colors - Forest Luxury Palette */
+  --bg-primary: #020617; /* Midnight Green-Black */
+  --bg-secondary: #042f2e; /* Deep Forest Green */
   --bg-card: rgba(255, 255, 255, 0.03);
   --bg-card-hover: rgba(255, 255, 255, 0.06);
   --bg-glass: rgba(255, 255, 255, 0.04);
   --border-subtle: rgba(255, 255, 255, 0.07);
   --border-hover: rgba(255, 255, 255, 0.15);
 
-  --text-primary: #f5f5f7;
-  --text-secondary: rgba(245, 245, 247, 0.6);
-  --text-tertiary: rgba(245, 245, 247, 0.35);
-  --text-accent: #a78bfa;
+  --text-primary: #f8fafc;
+  --text-secondary: rgba(248, 250, 252, 0.65);
+  --text-tertiary: rgba(248, 250, 252, 0.35);
+  --text-accent: #4ade80; /* Emerald Green */
 
-  --accent-primary: #a78bfa;
-  --accent-secondary: #818cf8;
-  --accent-glow: rgba(167, 139, 250, 0.15);
-  --accent-glow-strong: rgba(167, 139, 250, 0.35);
+  --accent-primary: #10b981; /* Emerald */
+  --accent-secondary: #059669; /* Forest */
+  --accent-glow: rgba(16, 185, 129, 0.15);
+  --accent-glow-strong: rgba(16, 185, 129, 0.35);
 
-  /* Vibrant Color Palette */
-  --color-violet: #a78bfa;
-  --color-indigo: #818cf8;
-  --color-cyan: #22d3ee;
-  --color-emerald: #34d399;
-  --color-rose: #fb7185;
-  --color-amber: #fbbf24;
-  --color-blue: #60a5fa;
-  --color-pink: #f472b6;
+  /* Forest & Gold Color Palette */
+  --color-emerald: #10b981;
+  --color-forest: #064e3b;
+  --color-mint: #34d399;
+  --color-lime: #a3e635;
+  --color-teal: #14b8a6;
+  --color-amber: #fbbf24; /* Golden Highlight */
+  --color-gold: #f59e0b;
+  --color-slate: #1e293b;
 
-  --gradient-1: linear-gradient(135deg, #a78bfa 0%, #818cf8 40%, #6366f1 100%);
-  --gradient-hero: linear-gradient(135deg, #a78bfa 0%, #f472b6 25%, #22d3ee 50%, #818cf8 75%, #a78bfa 100%);
-  --gradient-vibrant: linear-gradient(135deg, #f472b6 0%, #a78bfa 30%, #22d3ee 60%, #34d399 100%);
-  --gradient-2: linear-gradient(135deg, #f472b6 0%, #a78bfa 100%);
-  --gradient-subtle: linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(129, 140, 248, 0.05) 100%);
-  --gradient-section-line: linear-gradient(90deg, transparent, #a78bfa, #22d3ee, #f472b6, transparent);
+  --gradient-1: linear-gradient(135deg, #10b981 0%, #064e3b 40%, #022c22 100%);
+  --gradient-hero: linear-gradient(135deg, #10b981 0%, #34d399 25%, #f59e0b 50%, #10b981 75%, #10b981 100%);
+  --gradient-vibrant: linear-gradient(135deg, #34d399 0%, #10b981 30%, #f59e0b 60%, #a3e635 100%);
+  --gradient-2: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  --gradient-subtle: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 78, 59, 0.05) 100%);
+  --gradient-section-line: linear-gradient(90deg, transparent, #10b981, #f59e0b, #34d399, transparent);
 
   /* Typography */
   --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -84,6 +84,11 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   cursor: none;
+  /* Premium Noise & Forest Overlay */
+  background-image: 
+    radial-gradient(circle at center, transparent 0%, rgba(2, 44, 34, 0.4) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
 }
 
 @media (max-width: 768px) {
@@ -446,7 +451,7 @@ body.cursor-hover .cursor-follower {
 .orb-1 {
   width: 650px;
   height: 650px;
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.45), rgba(99, 102, 241, 0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.35), rgba(6, 78, 59, 0.1), transparent 70%);
   top: -200px;
   right: -100px;
   animation-delay: 0s;
@@ -455,7 +460,7 @@ body.cursor-hover .cursor-follower {
 .orb-2 {
   width: 550px;
   height: 550px;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.3), rgba(52, 211, 153, 0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.25), rgba(4, 47, 46, 0.08), transparent 70%);
   bottom: -150px;
   left: -100px;
   animation-delay: -7s;
@@ -464,7 +469,7 @@ body.cursor-hover .cursor-follower {
 .orb-3 {
   width: 450px;
   height: 450px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.35), rgba(251, 113, 133, 0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.05), transparent 70%);
   top: 40%;
   left: 50%;
   animation-delay: -14s;
@@ -473,7 +478,7 @@ body.cursor-hover .cursor-follower {
 .orb-4 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.08), transparent 70%);
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.2), rgba(132, 204, 22, 0.08), transparent 70%);
   top: 10%;
   left: -10%;
   animation-delay: -10s;
