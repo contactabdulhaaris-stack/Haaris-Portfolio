@@ -68,7 +68,7 @@ function initCursor() {
   animateCursor();
 
   // Hover effects
-  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card');
+  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .btn-resume');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -209,7 +209,7 @@ function animateCounter(element, target) {
 function initMagneticButtons() {
   if (window.innerWidth <= 768) return;
 
-  const buttons = document.querySelectorAll('.btn, .btn-contact-primary, .btn-contact-secondary');
+  const buttons = document.querySelectorAll('.btn, .btn-contact-primary, .btn-contact-secondary, .btn-resume');
 
   buttons.forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
@@ -302,22 +302,30 @@ function initActiveNavTracking() {
 function initPdfViewer() {
   const modal = document.getElementById('pdf-modal');
   const iframe = document.getElementById('pdf-iframe');
+  const loader = document.getElementById('pdf-loader');
   const projectName = document.getElementById('pdf-modal-project-name');
   const downloadBtn = document.getElementById('pdf-download-btn');
   const closeBtn = document.getElementById('pdf-close-btn');
   const backdrop = modal?.querySelector('.pdf-modal-backdrop');
 
-  if (!modal || !iframe) return;
+  if (!modal || !iframe || !loader) return;
 
   // Project name mapping
   const projectNames = {
     focusflow: 'FocusFlow — Case Study',
     mosqueconnect: 'MasjidConnect — Case Study',
-    curator: 'Curator — Case Study'
+    curator: 'Curator — Case Study',
+    resume: 'Abdul Haaris — Resume'
   };
 
   function openPdf(pdfUrl, project) {
-    iframe.src = pdfUrl;
+    // Show loader and hide iframe initially
+    loader.classList.remove('hidden');
+    iframe.classList.remove('loaded');
+    
+    // Add #view=FitH to ensure the PDF fits the screen width automatically
+    iframe.src = pdfUrl + '#view=FitH';
+    
     projectName.textContent = projectNames[project] || 'Case Study';
     downloadBtn.href = pdfUrl;
     modal.classList.add('active');
@@ -327,17 +335,36 @@ function initPdfViewer() {
   function closePdf() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
-    setTimeout(() => { iframe.src = ''; }, 400);
+    // Clear src after a delay to allow the closing animation to finish
+    setTimeout(() => { 
+      iframe.src = ''; 
+      iframe.classList.remove('loaded');
+      loader.classList.remove('hidden');
+    }, 400);
   }
 
+  // Handle iframe load
+  iframe.addEventListener('load', () => {
+    if (iframe.src !== '' && iframe.src !== 'about:blank') {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        iframe.classList.add('loaded');
+      }, 500); // Small extra delay for smooth visual transition
+    }
+  });
+
   // Open on button click
-  document.querySelectorAll('.btn-case-study').forEach(btn => {
+  document.querySelectorAll('.btn-case-study, .btn-resume').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      e.stopPropagation();
+      // Logic for PDF modal
       const pdfUrl = btn.getAttribute('data-pdf');
-      const card = btn.closest('.project-card');
-      const project = card?.getAttribute('data-project') || '';
-      openPdf(pdfUrl, project);
+      const project = btn.closest('.project-card')?.getAttribute('data-project') || btn.getAttribute('data-project') || 'resume';
+      
+      if (pdfUrl) {
+        e.preventDefault();
+        e.stopPropagation();
+        openPdf(pdfUrl, project);
+      }
     });
   });
 
