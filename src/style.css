@@ -1418,12 +1418,18 @@ body.cursor-hover .cursor-follower {
 /* ============================================
    CASE STUDY BUTTON
    ============================================ */
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
 .btn-case-study {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 12px 24px;
-  margin-top: 20px;
   border-radius: 100px;
   background: transparent;
   border: 1px solid var(--border-subtle);
@@ -1436,6 +1442,7 @@ body.cursor-hover .cursor-follower {
   transition: all 0.4s var(--ease-out-expo);
   position: relative;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .btn-case-study::before {
