@@ -315,6 +315,7 @@ function initPdfViewer() {
     focusflow: 'FocusFlow — Case Study',
     mosqueconnect: 'MasjidConnect — Case Study',
     curator: 'Curator — Case Study',
+    parkplus: 'Park+ — Feature Autopay',
     resume: 'Abdul Haaris — Resume'
   };
 
