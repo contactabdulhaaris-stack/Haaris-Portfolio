@@ -1151,6 +1151,136 @@ body.cursor-hover .cursor-follower {
 }
 
 /* ============================================
+   ARCHIVE SECTION (Illustration Practice)
+   ============================================ */
+.archive-section {
+  background: var(--bg-primary);
+  position: relative;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.archive-item {
+  position: relative;
+}
+
+.archive-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.5s var(--ease-out-expo);
+  aspect-ratio: 1 / 1;
+}
+
+.archive-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.archive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out-expo);
+  filter: grayscale(0.2) contrast(1.1);
+}
+
+.archive-card:hover .archive-image {
+  transform: scale(1.1);
+  filter: grayscale(0) contrast(1);
+}
+
+.archive-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11, 11, 15, 0.9) 0%, rgba(11, 11, 15, 0.4) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  opacity: 0;
+  transition: all 0.4s var(--ease-out-expo);
+  transform: translateY(10px);
+}
+
+.archive-card:hover .archive-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.archive-info {
+  position: relative;
+  z-index: 2;
+}
+
+.archive-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--accent-glow);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.archive-item-title {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.archive-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+              0 0 30px var(--accent-glow);
+}
+
+.archive-footer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.archive-hint {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .archive-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .archive-card {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* ============================================
    CONTACT SECTION
    ============================================ */
 .contact-section {

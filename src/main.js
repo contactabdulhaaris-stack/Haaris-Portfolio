@@ -68,7 +68,7 @@ function initCursor() {
   animateCursor();
 
   // Hover effects
-  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .btn-resume');
+  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .btn-resume, .archive-card');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
