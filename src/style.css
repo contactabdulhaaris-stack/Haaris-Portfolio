@@ -470,6 +470,8 @@ body.cursor-hover .cursor-follower {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  padding-top: 120px;
+  padding-bottom: 40px;
 }
 
 .hero-bg {
