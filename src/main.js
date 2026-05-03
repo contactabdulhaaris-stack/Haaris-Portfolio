@@ -329,6 +329,8 @@ function initPdfViewer() {
     
     projectName.textContent = projectNames[project] || 'Case Study';
     downloadBtn.href = pdfUrl;
+    // Explicitly set the download filename so it doesn't save as a random string
+    downloadBtn.setAttribute('download', pdfUrl.split('/').pop());
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
