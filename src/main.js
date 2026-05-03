@@ -116,7 +116,7 @@ function initNav() {
 // SMOOTH SCROLL
 // ============================================
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       e.preventDefault();
       const target = document.querySelector(anchor.getAttribute('href'));
