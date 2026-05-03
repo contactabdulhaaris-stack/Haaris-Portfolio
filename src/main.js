@@ -328,12 +328,58 @@ function initPdfViewer() {
     iframe.src = pdfUrl + '#view=FitH';
     
     projectName.textContent = projectNames[project] || 'Case Study';
-    downloadBtn.href = pdfUrl;
-    // Explicitly set the download filename so it doesn't save as a random string
+    
+    // Set attributes for the manual fetch download
+    downloadBtn.href = '#';
+    downloadBtn.setAttribute('data-pdf-url', pdfUrl);
     downloadBtn.setAttribute('download', pdfUrl.split('/').pop());
+    
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
+
+  // Handle explicit Blob download to prevent corrupted files
+  downloadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const url = downloadBtn.getAttribute('data-pdf-url');
+    const filename = downloadBtn.getAttribute('download') || 'document.pdf';
+    
+    if (!url) return;
+    
+    const span = downloadBtn.querySelector('span');
+    const originalText = span.textContent;
+    span.textContent = 'Downloading...';
+    downloadBtn.style.pointerEvents = 'none';
+    downloadBtn.style.opacity = '0.7';
+    
+    fetch(url)
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.blob();
+      })
+      .then(blob => {
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(blobUrl);
+        document.body.removeChild(a);
+        
+        span.textContent = originalText;
+        downloadBtn.style.pointerEvents = '';
+        downloadBtn.style.opacity = '1';
+      })
+      .catch(err => {
+        console.error('Download error:', err);
+        window.open(url, '_blank');
+        span.textContent = originalText;
+        downloadBtn.style.pointerEvents = '';
+        downloadBtn.style.opacity = '1';
+      });
+  });
 
   function closePdf() {
     modal.classList.remove('active');
