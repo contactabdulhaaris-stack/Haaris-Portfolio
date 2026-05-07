@@ -2311,7 +2311,7 @@ body.cursor-hover .cursor-follower {
   letter-spacing: 0.05em;
   user-select: none;
   height: 200%;
-  font-size: clamp(6px, 2vw, 22px);
+  font-size: clamp(14px, 4.5vw, 22px);
   line-height: 1;
 }
 
