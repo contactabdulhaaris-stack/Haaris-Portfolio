@@ -3,7 +3,7 @@
    ============================================ */
 
 import './style.css';
-
+import { TextFlippingBoard } from './flipping-board.js';
 // ============================================
 // LOADING SCREEN
 // ============================================
@@ -441,6 +441,32 @@ function initPdfViewer() {
 }
 
 // ============================================
+// ============================================
+// TEXT FLIPPING BOARD
+// ============================================
+function initFlippingBoard() {
+  const container = document.getElementById('flipping-board-container');
+  if (!container) return;
+
+  const texts = [
+    "STAY HUNGRY STAY IN BED - STEVE JOBS",
+    "HUMAN IS THE MOST COMPLEX DEVICE EVER",
+    "ART IS EVERYWHERE"
+  ];
+  let currentIndex = 0;
+
+  const board = new TextFlippingBoard(container, {
+    text: texts[currentIndex],
+    duration: 2.5
+  });
+
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % texts.length;
+    board.updateText(texts[currentIndex]);
+  }, 6000);
+}
+
+// ============================================
 // INITIALIZE EVERYTHING
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -455,4 +481,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initActiveNavTracking();
   initPdfViewer();
+  initFlippingBoard();
 });
