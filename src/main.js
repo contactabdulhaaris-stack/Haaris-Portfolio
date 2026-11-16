@@ -313,6 +313,7 @@ function initPdfViewer() {
 
   // Project name mapping
   const projectNames = {
+    parkplusbrochure: 'Park+ — Corporate Brochure',
     blogrevamp: 'Park+ — Blog Revamp',
     storerevamp: 'Park+ — Store Revamp',
     smarttag: 'Park+ — Smart Tag Activation',
@@ -477,6 +478,110 @@ function initFlippingBoard() {
 }
 
 // ============================================
+// HIGH-RESOLUTION PAGE INSPECTOR LIGHTBOX
+// ============================================
+function initArtworkLightbox() {
+  const lightbox = document.getElementById('artwork-lightbox');
+  const stage = document.getElementById('artwork-lightbox-stage');
+  const img = document.getElementById('artwork-lightbox-img');
+  const counter = document.getElementById('lightbox-page-counter');
+  const caption = document.getElementById('lightbox-page-caption');
+  const prevBtn = document.getElementById('lightbox-prev-btn');
+  const nextBtn = document.getElementById('lightbox-next-btn');
+  const zoomBtn = document.getElementById('lightbox-zoom-btn');
+  const closeBtn = document.getElementById('lightbox-close-btn');
+  const backdrop = document.getElementById('artwork-lightbox-backdrop');
+
+  if (!lightbox || !img) return;
+
+  const frames = Array.from(document.querySelectorAll('#brochure-gallery .editorial-frame'));
+  if (!frames.length) return;
+
+  let currentIndex = 0;
+
+  function updateLightboxView(index) {
+    currentIndex = (index + frames.length) % frames.length;
+    const frame = frames[currentIndex];
+    const frameImg = frame.querySelector('.editorial-artwork-img');
+    const frameCaption = frame.getAttribute('data-caption') || `Page ${String(currentIndex + 1).padStart(2, '0')}`;
+
+    stage.classList.remove('zoomed');
+    if (zoomBtn) zoomBtn.querySelector('span').textContent = 'ZOOM +';
+
+    img.src = frameImg ? frameImg.src : '';
+    img.alt = frameCaption;
+    if (counter) {
+      counter.textContent = `PG. ${String(currentIndex + 1).padStart(2, '0')} / ${String(frames.length).padStart(2, '0')}`;
+    }
+    if (caption) {
+      caption.textContent = frameCaption;
+    }
+  }
+
+  function openLightbox(index) {
+    updateLightboxView(index);
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    stage.classList.remove('zoomed');
+    document.body.style.overflow = '';
+  }
+
+  function toggleZoom() {
+    const isZoomed = stage.classList.toggle('zoomed');
+    if (zoomBtn) {
+      zoomBtn.querySelector('span').textContent = isZoomed ? 'ZOOM −' : 'ZOOM +';
+    }
+  }
+
+  frames.forEach((frame, idx) => {
+    frame.addEventListener('click', () => openLightbox(idx));
+  });
+
+  // Top "Inspect All 8 Pages" button & quick-jump index buttons
+  const inspectAllBtn = document.getElementById('btn-inspect-brochure');
+  inspectAllBtn?.addEventListener('click', () => openLightbox(0));
+
+  document.querySelectorAll('.editorial-thumb-btn[data-thumb-index]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.getAttribute('data-thumb-index'), 10) || 0;
+      openLightbox(idx);
+    });
+  });
+
+  prevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    updateLightboxView(currentIndex - 1);
+  });
+
+  nextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    updateLightboxView(currentIndex + 1);
+  });
+
+  zoomBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleZoom();
+  });
+
+  img.addEventListener('click', toggleZoom);
+  closeBtn?.addEventListener('click', closeLightbox);
+  backdrop?.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') updateLightboxView(currentIndex - 1);
+    if (e.key === 'ArrowRight') updateLightboxView(currentIndex + 1);
+  });
+}
+
+// ============================================
 // INITIALIZE EVERYTHING
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -492,5 +597,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initActiveNavTracking();
   initPdfViewer();
+  initArtworkLightbox();
   initFlippingBoard();
 });
