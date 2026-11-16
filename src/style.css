@@ -27,6 +27,13 @@
   --accent-yellow: #f3cb00;
   --accent-yellow-light: #ffe600;
   --accent-red: #e63946;
+  --accent-glow: rgba(14, 14, 14, 0.12);
+  --color-cyan: #0e0e0e;
+
+  --gradient-vibrant: linear-gradient(135deg, #0e0e0e 0%, #3a3a3a 100%);
+  --gradient-1: linear-gradient(90deg, #0e0e0e, #4a4a4a);
+  --gradient-subtle: linear-gradient(135deg, rgba(14, 14, 14, 0.03), transparent);
+  --gradient-section-line: linear-gradient(90deg, transparent, rgba(14, 14, 14, 0.25), transparent);
 
   --shadow-brutal: 4px 4px 0px #0e0e0e;
   --shadow-brutal-lg: 6px 6px 0px #0e0e0e;
@@ -219,15 +226,12 @@ body.cursor-hover .cursor-follower {
 
 .section-label {
   display: inline-block;
-  font-family: var(--font-secondary);
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  background: var(--gradient-vibrant);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   margin-bottom: 20px;
   position: relative;
   padding-left: 24px;
@@ -240,8 +244,8 @@ body.cursor-hover .cursor-follower {
   top: 50%;
   width: 14px;
   height: 2px;
-  background: var(--gradient-vibrant);
-  border-radius: 2px;
+  background: var(--text-primary);
+  border-radius: 0;
 }
 
 .section-title {
@@ -254,10 +258,7 @@ body.cursor-hover .cursor-follower {
 }
 
 .accent-dot {
-  background: var(--gradient-vibrant);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 /* --- Reveal Animation --- */
@@ -932,11 +933,8 @@ body.cursor-hover .cursor-follower {
   display: inline;
   font-family: var(--font-primary);
   font-size: clamp(2rem, 3vw, 2.8rem);
-  font-weight: 700;
-  background: var(--gradient-vibrant);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 800;
+  color: var(--text-primary);
   letter-spacing: -0.03em;
 }
 
@@ -944,16 +942,14 @@ body.cursor-hover .cursor-follower {
   font-family: var(--font-primary);
   font-size: clamp(1.5rem, 2vw, 2rem);
   font-weight: 700;
-  background: var(--gradient-vibrant);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 .stat-label {
   display: block;
-  font-size: 0.78rem;
-  color: var(--text-tertiary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
   margin-top: 6px;
   letter-spacing: 0.03em;
 }
