@@ -1,64 +1,59 @@
+@import './sections/hero/hero.css';
+
 /* ============================================
    ABDUL HAARIS — PREMIUM PORTFOLIO
    ============================================ */
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Colors */
-  --bg-primary: #0b0b0f;
-  --bg-secondary: #0e0e14;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.06);
-  --bg-glass: rgba(255, 255, 255, 0.04);
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-hover: rgba(255, 255, 255, 0.15);
+  /* Brutalist Theme Color Tokens */
+  --bg-primary: #f4f3ef;
+  --bg-secondary: #e8e7e0;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0efe7;
+  --bg-glass: rgba(244, 243, 239, 0.95);
+  
+  --border-color: #0e0e0e;
+  --border-subtle: #0e0e0e;
+  --border-hover: #0e0e0e;
+  --border-thick: 2.5px solid #0e0e0e;
 
-  --text-primary: #f5f5f7;
-  --text-secondary: rgba(245, 245, 247, 0.6);
-  --text-tertiary: rgba(245, 245, 247, 0.35);
-  --text-accent: #a78bfa;
+  --text-primary: #0e0e0e;
+  --text-secondary: #242424;
+  --text-tertiary: #555555;
+  --text-accent: #0e0e0e;
 
-  --accent-primary: #a78bfa;
-  --accent-secondary: #818cf8;
-  --accent-glow: rgba(167, 139, 250, 0.15);
-  --accent-glow-strong: rgba(167, 139, 250, 0.35);
+  --accent-primary: #0e0e0e;
+  --accent-yellow: #f3cb00;
+  --accent-yellow-light: #ffe600;
+  --accent-red: #e63946;
 
-  /* Vibrant Color Palette */
-  --color-violet: #a78bfa;
-  --color-indigo: #818cf8;
-  --color-cyan: #22d3ee;
-  --color-emerald: #34d399;
-  --color-rose: #fb7185;
-  --color-amber: #fbbf24;
-  --color-blue: #60a5fa;
-  --color-pink: #f472b6;
-
-  --gradient-1: linear-gradient(135deg, #a78bfa 0%, #818cf8 40%, #6366f1 100%);
-  --gradient-hero: linear-gradient(135deg, #a78bfa 0%, #f472b6 25%, #22d3ee 50%, #818cf8 75%, #a78bfa 100%);
-  --gradient-vibrant: linear-gradient(135deg, #f472b6 0%, #a78bfa 30%, #22d3ee 60%, #34d399 100%);
-  --gradient-2: linear-gradient(135deg, #f472b6 0%, #a78bfa 100%);
-  --gradient-subtle: linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(129, 140, 248, 0.05) 100%);
-  --gradient-section-line: linear-gradient(90deg, transparent, #a78bfa, #22d3ee, #f472b6, transparent);
+  --shadow-brutal: 4px 4px 0px #0e0e0e;
+  --shadow-brutal-lg: 6px 6px 0px #0e0e0e;
+  --shadow-brutal-sm: 2px 2px 0px #0e0e0e;
 
   /* Typography */
   --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', 'Instrument Serif', Georgia, serif;
+  --font-sans-heavy: 'Syne', 'Outfit', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
 
   /* Spacing */
-  --section-padding: clamp(80px, 12vh, 160px);
-  --container-max: 1200px;
-  --container-padding: clamp(20px, 5vw, 80px);
+  --section-padding: clamp(60px, 9vh, 120px);
+  --container-max: 1320px;
+  --container-padding: clamp(16px, 4vw, 50px);
 
   /* Transitions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Border Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  /* Brutalist Border Radius (Sharp / Square) */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 }
 
 /* --- Reset & Base --- */
@@ -279,25 +274,28 @@ body.cursor-hover .cursor-follower {
   transform: translateY(0);
 }
 
-/* ============================================
-   NAVIGATION
-   ============================================ */
+/* ==========================================================================
+   BRUTALIST TOP NAVIGATION BAR & BUTTONS
+   ========================================================================== */
 .nav {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 20px 0;
-  transition: all 0.5s var(--ease-smooth);
+  padding: 24px 0;
+  background: transparent;
+  border: none;
+  transition: all 0.25s ease;
 }
 
 .nav.scrolled {
-  padding: 12px 0;
-  background: rgba(9, 9, 11, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-subtle);
+  position: fixed;
+  background: rgba(11, 11, 14, 0.94);
+  backdrop-filter: blur(14px);
+  padding: 14px 0;
+  border-bottom: 2px solid rgba(237, 231, 220, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .nav-inner {
@@ -309,114 +307,172 @@ body.cursor-hover .cursor-follower {
   justify-content: space-between;
 }
 
-.nav-logo {
-  font-family: var(--font-primary);
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  position: relative;
+/* Brutalist Logo Badge */
+.nav-logo-matisse {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: #0e0e12;
+  border: 2px solid #ede7dc;
+  border-radius: 0px;
+  box-shadow: 3px 3px 0px #ede7dc;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
-.logo-dot {
-  color: var(--accent-primary);
+.nav-logo-matisse .line-bar {
+  width: 10px;
+  height: 10px;
+  background: #f3cb00;
+  margin: 0;
+  border-radius: 0px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.nav-links {
-  display: flex;
-  gap: 36px;
-}
-
-.nav-link {
-  font-family: var(--font-secondary);
+.nav-logo-matisse span {
+  font-family: 'Space Mono', monospace;
   font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--text-secondary);
-  letter-spacing: 0.02em;
-  position: relative;
-  padding: 4px 0;
-  transition: color 0.3s ease;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ede7dc;
+  transition: color 0.15s ease;
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent-primary);
-  transition: width 0.4s var(--ease-out-expo);
+.nav-logo-matisse:hover {
+  background: #ede7dc;
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #ffffff;
 }
 
-.nav-link:hover {
-  color: var(--text-primary);
+.nav-logo-matisse:hover span {
+  color: #0b0b0e;
 }
 
-.nav-link:hover::after {
-  width: 100%;
+.nav-logo-matisse:hover .line-bar {
+  background: #0b0b0e;
+  transform: rotate(45deg);
 }
 
-.nav-resume-link {
-  background: var(--bg-glass);
-  border: 1px solid var(--border-subtle);
-  padding: 8px 20px !important;
-  border-radius: 100px;
-  margin-left: 8px;
-  transition: all 0.4s var(--ease-out-expo) !important;
+.nav-logo-matisse:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px transparent;
 }
 
-.nav-resume-link::after {
-  display: none;
+/* Brutalist Nav Buttons Group */
+.nav-links-matisse {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.nav-resume-link:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--accent-primary);
-  transform: translateY(-2px);
-  color: var(--text-primary) !important;
-  box-shadow: 0 4px 15px rgba(167, 139, 250, 0.15);
+/* Individual Brutalist Button */
+.nav-link-matisse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 15px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ede7dc !important;
+  background: #0e0e12;
+  border: 2px solid #ede7dc !important;
+  border-radius: 0px !important;
+  box-shadow: 3px 3px 0px #ede7dc !important;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
-/* Mobile Menu Button */
+/* Hover State — Mechanical Click/Depression */
+.nav-link-matisse:hover {
+  background: #ede7dc !important;
+  color: #0b0b0e !important;
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #ffffff !important;
+}
+
+/* Active Pressed State */
+.nav-link-matisse:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px transparent !important;
+}
+
+/* Brutalist Accent Button: Resume */
+.nav-link-matisse.btn-resume {
+  background: #f3cb00 !important;
+  color: #0b0b0e !important;
+  border: 2px solid #ede7dc !important;
+  box-shadow: 3px 3px 0px #ede7dc !important;
+}
+
+.nav-link-matisse.btn-resume:hover {
+  background: #ffffff !important;
+  color: #0b0b0e !important;
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #ede7dc !important;
+}
+
+.nav-link-matisse.btn-resume:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px transparent !important;
+}
+
+/* Brutalist Mobile Menu Toggle Button */
 .nav-menu-btn {
   display: none;
   flex-direction: column;
-  gap: 6px;
-  padding: 8px;
+  gap: 5px;
+  padding: 8px 10px;
+  background: #0e0e12;
+  border: 2px solid #ede7dc;
+  border-radius: 0px;
+  box-shadow: 2px 2px 0px #ede7dc;
+  cursor: pointer;
   z-index: 1001;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.nav-menu-btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #ede7dc;
 }
 
 .nav-menu-btn span {
   display: block;
-  width: 24px;
-  height: 1.5px;
-  background: var(--text-primary);
-  transition: all 0.4s var(--ease-out-expo);
-  transform-origin: center;
+  width: 22px;
+  height: 2px;
+  background: #ede7dc !important;
+  transition: all 0.25s ease;
 }
 
 .nav-menu-btn.active span:first-child {
-  transform: rotate(45deg) translate(3px, 3px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .nav-menu-btn.active span:last-child {
-  transform: rotate(-45deg) translate(3px, -3px);
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile Menu */
+/* Mobile Drawer Links — Full Brutalist Blocks */
 .mobile-menu {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: rgba(9, 9, 11, 0.98);
-  backdrop-filter: blur(40px);
+  background: rgba(11, 11, 14, 0.98);
+  backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.5s var(--ease-out-expo);
+  transition: all 0.3s ease;
 }
 
 .mobile-menu.active {
@@ -428,209 +484,52 @@ body.cursor-hover .cursor-follower {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
+  width: 100%;
+  max-width: 360px;
+  padding: 20px;
 }
 
 .mobile-link {
-  font-family: var(--font-primary);
-  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text-primary);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.5s var(--ease-out-expo);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ede7dc;
+  background: #14141a;
+  border: 2px solid #ede7dc;
+  border-radius: 0px;
+  box-shadow: 4px 4px 0px #ede7dc;
+  padding: 14px 20px;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
-.mobile-menu.active .mobile-link {
-  opacity: 1;
-  transform: translateY(0);
+.mobile-link:hover, .mobile-link:active {
+  background: #ede7dc;
+  color: #0b0b0e;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #ffffff;
 }
 
-.mobile-menu.active .mobile-link:nth-child(1) { transition-delay: 0.1s; }
-.mobile-menu.active .mobile-link:nth-child(2) { transition-delay: 0.2s; }
-.mobile-menu.active .mobile-link:nth-child(3) { transition-delay: 0.3s; }
-.mobile-menu.active .mobile-link:nth-child(4) { transition-delay: 0.4s; }
-
-.mobile-link:hover {
-  color: var(--accent-primary);
+.mobile-link.btn-resume {
+  background: #f3cb00;
+  color: #0b0b0e;
 }
 
-@media (max-width: 768px) {
-  .nav-links { display: none; }
+@media (max-width: 900px) {
+  .nav-links-matisse { display: none; }
   .nav-menu-btn { display: flex; }
 }
 
 /* ============================================
-   HERO SECTION
+   HERO SECTION (MODULAR)
    ============================================ */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  padding-top: 120px;
-  padding-bottom: 40px;
-}
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
 
-.gradient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.5;
-  animation: orbFloat 20s ease-in-out infinite;
-}
-
-.orb-1 {
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.45), rgba(99, 102, 241, 0.15), transparent 70%);
-  top: -200px;
-  right: -100px;
-  animation-delay: 0s;
-}
-
-.orb-2 {
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.3), rgba(52, 211, 153, 0.1), transparent 70%);
-  bottom: -150px;
-  left: -100px;
-  animation-delay: -7s;
-}
-
-.orb-3 {
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.35), rgba(251, 113, 133, 0.1), transparent 70%);
-  top: 40%;
-  left: 50%;
-  animation-delay: -14s;
-}
-
-.orb-4 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.08), transparent 70%);
-  top: 10%;
-  left: -10%;
-  animation-delay: -10s;
-}
-
-@keyframes orbFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(50px, -30px) scale(1.1); }
-  50% { transform: translate(-30px, 50px) scale(0.95); }
-  75% { transform: translate(30px, 30px) scale(1.05); }
-}
-
-.hero-content {
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  padding: 0 var(--container-padding);
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
-  border-radius: 100px;
-  background: var(--bg-glass);
-  border: 1px solid var(--border-subtle);
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-bottom: 40px;
-  backdrop-filter: blur(10px);
-}
-
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  background: #34d399;
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
-  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
-}
-
-.hero-name {
-  font-family: var(--font-primary);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  margin-bottom: 28px;
-}
-
-.hero-line {
-  display: block;
-  font-size: clamp(3.5rem, 12vw, 8.5rem);
-}
-
-.hero-line:last-child {
-  background: var(--gradient-hero);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 6s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% center; }
-  50% { background-position: 100% center; }
-}
-
-.hero-tagline {
-  font-family: var(--font-secondary);
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  font-weight: 300;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 48px;
-  letter-spacing: 0.01em;
-}
-
-.tagline-highlight {
-  background: linear-gradient(135deg, var(--color-cyan), var(--color-violet));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 600;
-  position: relative;
-}
-
-.tagline-highlight::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-cyan), var(--color-violet));
-  opacity: 0.6;
-  border-radius: 2px;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 80px;
-}
 
 /* --- Buttons --- */
 .btn {

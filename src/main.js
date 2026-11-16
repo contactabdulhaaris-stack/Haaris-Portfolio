@@ -4,6 +4,7 @@
 
 import './style.css';
 import { TextFlippingBoard } from './flipping-board.js';
+import { initHero } from './sections/hero/hero.js';
 // ============================================
 // LOADING SCREEN
 // ============================================
@@ -24,7 +25,7 @@ function initLoader() {
       loader.classList.add('hidden');
       setTimeout(() => loader.remove(), 600);
       // Trigger hero animations
-      document.querySelectorAll('.hero .reveal-up').forEach((el, i) => {
+      document.querySelectorAll('.hero-poster .reveal-up, .hero-matisse .reveal-up, .hero .reveal-up').forEach((el, i) => {
         setTimeout(() => el.classList.add('revealed'), i * 100);
       });
     }, 1500);
@@ -68,7 +69,7 @@ function initCursor() {
   animateCursor();
 
   // Hover effects
-  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .btn-resume, .archive-card');
+  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .btn-resume, .archive-card, .poster-btn, .poster-sticky-note, .planet-illustration, .vintage-eye-crop');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -156,7 +157,7 @@ function initScrollReveal() {
 
   revealElements.forEach(el => {
     // Don't observe hero elements — they're handled by the loader
-    if (!el.closest('.hero')) {
+    if (!el.closest('.hero') && !el.closest('.hero-matisse')) {
       observer.observe(el);
     }
   });
@@ -209,7 +210,7 @@ function animateCounter(element, target) {
 function initMagneticButtons() {
   if (window.innerWidth <= 768) return;
 
-  const buttons = document.querySelectorAll('.btn, .btn-contact-primary, .btn-contact-secondary, .btn-resume');
+  const buttons = document.querySelectorAll('.btn, .btn-contact-primary, .btn-contact-secondary, .btn-resume, .poster-btn');
 
   buttons.forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
@@ -477,6 +478,7 @@ function initFlippingBoard() {
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
+  initHero();
   initCursor();
   initNav();
   initSmoothScroll();
