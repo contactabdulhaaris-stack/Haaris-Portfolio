@@ -313,6 +313,7 @@ function initPdfViewer() {
 
   // Project name mapping
   const projectNames = {
+    smarttag: 'Park+ — Smart Tag Activation',
     focusflow: 'FocusFlow — Case Study',
     mosqueconnect: 'MasjidConnect — Case Study',
     curator: 'Curator — Case Study',
