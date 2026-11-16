@@ -6,7 +6,8 @@
 /* --- Container & Canvas --- */
 .hero-poster {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 640px;
   width: 100%;
   background-color: #0b0b0e;
   background-image: 
@@ -17,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-x: clip;
+  overflow: hidden;
   padding: 80px 24px 30px;
   box-sizing: border-box;
 }
@@ -70,7 +71,9 @@
   position: relative;
   width: 100%;
   max-width: 1380px;
-  min-height: calc(100vh - 110px);
+  height: calc(100vh - 110px);
+  min-height: 520px;
+  max-height: 900px;
   display: grid;
   grid-template-columns: 1.08fr 38px 0.92fr;
   grid-template-rows: 1fr;
@@ -651,11 +654,12 @@
 @media (min-width: 961px) {
   .hero-poster {
     height: 100vh;
+    min-height: 640px;
     max-height: 100vh;
     padding: 72px 24px 18px;
   }
   .poster-board {
-    height: 100%;
+    height: calc(100vh - 90px);
     max-height: calc(100vh - 90px);
     min-height: 520px;
   }
