@@ -1090,6 +1090,126 @@ body.cursor-hover .cursor-follower {
   background: var(--bg-card);
   border: 1.5px solid var(--border-color);
   box-shadow: var(--shadow-brutal);
+  transition: transform 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo), background 0.2s ease;
+}
+
+.beyond-clickable-card {
+  cursor: pointer;
+}
+
+.beyond-clickable-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-brutal-lg);
+}
+
+/* Full-Screen Editorial Gallery View Modal */
+.beyond-gallery-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease-out-expo), visibility 0.3s var(--ease-out-expo);
+}
+
+.beyond-gallery-modal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.beyond-gallery-topbar {
+  background: #0e0e12;
+  color: #ede7dc;
+  border-bottom: 2px solid #ede7dc;
+  padding: 14px 0;
+  flex-shrink: 0;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+
+.beyond-gallery-topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.beyond-gallery-topbar-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ede7dc;
+}
+
+.beyond-gallery-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 9px;
+  background: var(--accent-yellow);
+  color: #0e0e0e;
+  border: 1.5px solid #ede7dc;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.beyond-gallery-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.beyond-gallery-back-btn,
+.beyond-gallery-action-btn,
+.beyond-gallery-close-btn {
+  padding: 7px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ede7dc;
+  background: #16161d;
+  border: 1.5px solid #ede7dc;
+  box-shadow: 2px 2px 0px #ede7dc;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.beyond-gallery-back-btn:hover,
+.beyond-gallery-action-btn:hover {
+  background: #ede7dc;
+  color: #0e0e12;
+  transform: translate(1px, 1px);
+}
+
+.beyond-gallery-close-btn {
+  background: var(--accent-yellow);
+  color: #0e0e12;
+}
+
+.beyond-gallery-close-btn:hover {
+  background: #ffffff;
+  color: #0e0e12;
+  transform: translate(1px, 1px);
+}
+
+.beyond-gallery-scroll-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(40px, 6vh, 80px) 0 clamp(60px, 8vh, 110px);
 }
 
 .beyond-spec-main {
@@ -1287,6 +1407,53 @@ body.cursor-hover .cursor-follower {
   height: auto;
   display: block;
   object-fit: contain;
+}
+
+/* Editorial Project Divider between Beyond Product entries */
+.beyond-project-divider {
+  margin: clamp(72px, 9vw, 130px) 0;
+  height: 2px;
+  background: var(--border-color);
+  position: relative;
+}
+
+.beyond-project-divider::after {
+  content: '◆';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2px 12px;
+  background: var(--bg-primary);
+  border: 1.5px solid var(--border-color);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-primary);
+}
+
+/* 16:9 Widescreen Slide Stage & Trio Grid */
+.editorial-stage-16-9 {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.editorial-stage-16-9 .editorial-artwork-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.editorial-hero-landscape {
+  grid-template-columns: 1.35fr 1fr;
+}
+
+.editorial-trio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 36px);
+  align-items: start;
 }
 
 /* 1. Editorial Hero Showcase (Cover + Monograph Notes) */
@@ -1644,6 +1811,7 @@ body.cursor-hover .cursor-follower {
   .beyond-header-grid,
   .beyond-spec-bar,
   .editorial-hero-showcase,
+  .editorial-trio-grid,
   .editorial-dual-spread-grid,
   .editorial-closing-showcase,
   .editorial-row-7-5,

@@ -478,7 +478,82 @@ function initFlippingBoard() {
 }
 
 // ============================================
-// HIGH-RESOLUTION PAGE INSPECTOR LIGHTBOX
+// PDF.JS SLIDE RENDERER (FOR VMS PITCH DECK)
+// ============================================
+const renderedPdfCache = new Map();
+
+async function renderPdfSlideToImg(imgEl) {
+  const pdfUrl = imgEl.getAttribute('data-pdf-slide');
+  if (!pdfUrl || imgEl.dataset.rendered === 'true') return imgEl.src;
+
+  if (renderedPdfCache.has(pdfUrl)) {
+    const dataUrl = await renderedPdfCache.get(pdfUrl);
+    if (dataUrl) {
+      imgEl.src = dataUrl;
+      imgEl.dataset.rendered = 'true';
+    }
+    return dataUrl;
+  }
+
+  const renderPromise = (async () => {
+    try {
+      const pdfjsLib = window['pdfjs-dist/build/pdf'] || window.pdfjsLib;
+      if (!pdfjsLib) return '';
+      if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      }
+
+      const encodedUrl = encodeURI(pdfUrl);
+      const loadingTask = pdfjsLib.getDocument(encodedUrl);
+      const pdf = await loadingTask.promise;
+      const page = await pdf.getPage(1);
+
+      const viewport = page.getViewport({ scale: 1.5 });
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      await page.render({ canvasContext: context, viewport }).promise;
+      const dataUrl = canvas.toDataURL('image/png');
+      imgEl.src = dataUrl;
+      imgEl.dataset.rendered = 'true';
+      return dataUrl;
+    } catch (err) {
+      console.error('Error rendering PDF slide:', pdfUrl, err);
+      return '';
+    }
+  })();
+
+  renderedPdfCache.set(pdfUrl, renderPromise);
+  return renderPromise;
+}
+
+function initPdfSlideRenderer() {
+  const slideImgs = document.querySelectorAll('img[data-pdf-slide]');
+  if (!slideImgs.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        renderPdfSlideToImg(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '600px 0px' });
+
+  slideImgs.forEach(img => observer.observe(img));
+}
+
+function renderAllSlidesInGallery(galleryEl) {
+  if (!galleryEl) return;
+  galleryEl.querySelectorAll('img[data-pdf-slide]').forEach(img => {
+    renderPdfSlideToImg(img);
+  });
+}
+
+// ============================================
+// EDITORIAL GALLERY VIEW MODAL & ZOOM LIGHTBOX
 // ============================================
 function initArtworkLightbox() {
   const lightbox = document.getElementById('artwork-lightbox');
@@ -492,33 +567,105 @@ function initArtworkLightbox() {
   const closeBtn = document.getElementById('lightbox-close-btn');
   const backdrop = document.getElementById('artwork-lightbox-backdrop');
 
-  if (!lightbox || !img) return;
+  const brochureFrames = Array.from(document.querySelectorAll('#brochure-gallery .editorial-frame'));
+  const vmsFrames = Array.from(document.querySelectorAll('#vms-gallery .editorial-frame'));
 
-  const frames = Array.from(document.querySelectorAll('#brochure-gallery .editorial-frame'));
-  if (!frames.length) return;
-
+  let activeFrames = brochureFrames;
+  let activePrefix = 'PG.';
   let currentIndex = 0;
 
-  function updateLightboxView(index) {
-    currentIndex = (index + frames.length) % frames.length;
-    const frame = frames[currentIndex];
+  // --- Full-Screen Editorial Gallery View Modal ---
+  function openGalleryModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Ensure reveal-up elements inside the gallery modal are visible immediately
+    modal.querySelectorAll('.reveal-up').forEach(el => el.classList.add('revealed'));
+
+    // Pre-render PDF slides when VMS gallery view opens
+    if (modalId === 'vms-gallery-modal') {
+      renderAllSlidesInGallery(modal);
+    }
+
+    const scrollBody = modal.querySelector('.beyond-gallery-scroll-body');
+    if (scrollBody) scrollBody.scrollTop = 0;
+  }
+
+  function closeGalleryModal(modalId) {
+    const modal = modalId
+      ? document.getElementById(modalId)
+      : document.querySelector('.beyond-gallery-modal.active');
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    if (!lightbox?.classList.contains('active')) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Open Gallery View when clicking homepage spec card or button
+  document.querySelectorAll('[data-open-gallery]').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const targetId = trigger.getAttribute('data-open-gallery');
+      openGalleryModal(targetId);
+    });
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const targetId = trigger.getAttribute('data-open-gallery');
+        openGalleryModal(targetId);
+      }
+    });
+  });
+
+  // Close Gallery View buttons
+  document.querySelectorAll('[data-close-gallery]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const targetId = btn.getAttribute('data-close-gallery');
+      closeGalleryModal(targetId);
+    });
+  });
+
+  if (!lightbox || !img) return;
+
+  async function updateLightboxView(index) {
+    if (!activeFrames.length) return;
+    currentIndex = (index + activeFrames.length) % activeFrames.length;
+    const frame = activeFrames[currentIndex];
     const frameImg = frame.querySelector('.editorial-artwork-img');
-    const frameCaption = frame.getAttribute('data-caption') || `Page ${String(currentIndex + 1).padStart(2, '0')}`;
+    const frameCaption = frame.getAttribute('data-caption') || `${activePrefix} ${String(currentIndex + 1).padStart(2, '0')}`;
 
     stage.classList.remove('zoomed');
     if (zoomBtn) zoomBtn.querySelector('span').textContent = 'ZOOM +';
 
-    img.src = frameImg ? frameImg.src : '';
-    img.alt = frameCaption;
     if (counter) {
-      counter.textContent = `PG. ${String(currentIndex + 1).padStart(2, '0')} / ${String(frames.length).padStart(2, '0')}`;
+      counter.textContent = `${activePrefix} ${String(currentIndex + 1).padStart(2, '0')} / ${String(activeFrames.length).padStart(2, '0')}`;
     }
     if (caption) {
       caption.textContent = frameCaption;
     }
+
+    if (frameImg) {
+      if (frameImg.hasAttribute('data-pdf-slide') && frameImg.dataset.rendered !== 'true') {
+        const dataUrl = await renderPdfSlideToImg(frameImg);
+        img.src = dataUrl || '';
+      } else {
+        img.src = frameImg.src || '';
+      }
+      img.alt = frameCaption;
+    }
   }
 
-  function openLightbox(index) {
+  function openLightbox(framesList, index, prefix = 'PG.') {
+    activeFrames = framesList;
+    activePrefix = prefix;
     updateLightboxView(index);
     lightbox.classList.add('active');
     lightbox.setAttribute('aria-hidden', 'false');
@@ -529,7 +676,9 @@ function initArtworkLightbox() {
     lightbox.classList.remove('active');
     lightbox.setAttribute('aria-hidden', 'true');
     stage.classList.remove('zoomed');
-    document.body.style.overflow = '';
+    if (!document.querySelector('.beyond-gallery-modal.active')) {
+      document.body.style.overflow = '';
+    }
   }
 
   function toggleZoom() {
@@ -539,18 +688,34 @@ function initArtworkLightbox() {
     }
   }
 
-  frames.forEach((frame, idx) => {
-    frame.addEventListener('click', () => openLightbox(idx));
+  brochureFrames.forEach((frame, idx) => {
+    frame.addEventListener('click', () => openLightbox(brochureFrames, idx, 'PG.'));
   });
 
-  // Top "Inspect All 8 Pages" button & quick-jump index buttons
-  const inspectAllBtn = document.getElementById('btn-inspect-brochure');
-  inspectAllBtn?.addEventListener('click', () => openLightbox(0));
+  vmsFrames.forEach((frame, idx) => {
+    frame.addEventListener('click', () => openLightbox(vmsFrames, idx, 'SLIDE'));
+  });
+
+  // Topbar "SLIDESHOW ZOOM" buttons & quick-jump index buttons inside Gallery View
+  document.getElementById('btn-slideshow-brochure')?.addEventListener('click', () => {
+    openLightbox(brochureFrames, 0, 'PG.');
+  });
+
+  document.getElementById('btn-slideshow-vms')?.addEventListener('click', () => {
+    openLightbox(vmsFrames, 0, 'SLIDE');
+  });
 
   document.querySelectorAll('.editorial-thumb-btn[data-thumb-index]').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = parseInt(btn.getAttribute('data-thumb-index'), 10) || 0;
-      openLightbox(idx);
+      openLightbox(brochureFrames, idx, 'PG.');
+    });
+  });
+
+  document.querySelectorAll('.editorial-thumb-btn[data-vms-thumb]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.getAttribute('data-vms-thumb'), 10) || 0;
+      openLightbox(vmsFrames, idx, 'SLIDE');
     });
   });
 
@@ -574,10 +739,16 @@ function initArtworkLightbox() {
   backdrop?.addEventListener('click', closeLightbox);
 
   document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') updateLightboxView(currentIndex - 1);
-    if (e.key === 'ArrowRight') updateLightboxView(currentIndex + 1);
+    if (lightbox.classList.contains('active')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') updateLightboxView(currentIndex - 1);
+      if (e.key === 'ArrowRight') updateLightboxView(currentIndex + 1);
+      return;
+    }
+    const activeGallery = document.querySelector('.beyond-gallery-modal.active');
+    if (activeGallery && e.key === 'Escape') {
+      closeGalleryModal(activeGallery.id);
+    }
   });
 }
 
@@ -597,6 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initActiveNavTracking();
   initPdfViewer();
+  initPdfSlideRenderer();
   initArtworkLightbox();
   initFlippingBoard();
 });
