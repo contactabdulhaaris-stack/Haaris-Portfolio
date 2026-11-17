@@ -69,7 +69,7 @@ function initCursor() {
   animateCursor();
 
   // Hover effects
-  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .btn-resume, .archive-card, .poster-btn, .poster-sticky-note, .planet-illustration, .vintage-eye-crop');
+  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .btn-resume, .archive-card, .poster-btn, .poster-sticky-note, .planet-illustration, .vintage-eye-crop, .beyond-clickable-card, .editorial-frame');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -274,8 +274,8 @@ function initParallax() {
 // ACTIVE NAV LINK TRACKING
 // ============================================
 function initActiveNavTracking() {
-  const sections = document.querySelectorAll('.section, .hero');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('.section, .hero, .hero-poster');
+  const navLinks = document.querySelectorAll('.nav-link, .nav-link-matisse');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
